@@ -116,10 +116,10 @@
 	is based on the number of forums you have. 
 	
 	Example: $(document).sidd('json'); 
-			//then c&p the output to say zendesk.json
+			//then c&p the output to say sidd.json
 			
 			//then init sidd using the local json model file..
-			$.getJSON("../resources/zendesk.json",function(json){
+			$.getJSON("../server/sidd.json",function(json){
 				$(document).sidd("init",{
 					url : "http://support.mymapped_domain.com", //you pass the url anyways for menu links
 					data : json
