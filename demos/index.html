@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Sidd Zendesk jQuery Plugin Demo</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script src="micro_tmpl.js"></script>
+		<script src="../jquery.sidd.js"></script>
+		<link rel="stylesheet" href="../sidd.css" type="text/css" media="screen" charset="utf-8">
+		<style>
+			#article{
+				background:#eee;
+				border:1px solid rgb(200,200,200);
+				padding:20px;	
+				margin:0px auto;
+				width:80%;
+			}
+			#article a.sidd-tip{
+				color:#78A300;
+			}
+			div.demo-box{
+				display:none;
+				width:100%;
+			}
+			
+			#forums-list li, #entries-list li{
+				cursor:pointer;
+			}
+			
+			#entries-list li{
+				width:90%;	
+			}
+			#entries-list li h2{
+				font-size:.9em;
+				font-weight:normal;	
+			}
+			
+			#entries-list li div.demo-box{
+				overflow:hidden;
+				background:white;
+				padding:20px;
+				-webkit-box-shadow:0px 1px 2px rgba(0,0,0,.5);
+				-webkit-box-shadow:	
+									0px 1px 0px rgba(255,255,255,.3),
+									0px 3px 0px rgba(245,245,245,.6),
+									0px 4px 0px rgba(0,0,0,.2),
+									0px 5px 1px rgba(0,0,0,.1),
+									0px 6px 3px rgba(0,0,0,.1);
+				-moz-box-shadow:	
+								0px 1px 0px rgba(255,255,255,.3),
+								0px 3px 0px rgba(245,245,245,.6),
+								0px 4px 0px rgba(0,0,0,.2),
+								0px 5px 1px rgba(0,0,0,.1),
+								0px 6px 3px rgba(0,0,0,.1);							
+
+				border-top: 1px solid rgba(0,0,0,.2);
+				border-right: 1px solid rgba(0,0,0,.2);
+				border-bottom: none;
+				border-left: 1px solid rgba(0,0,0,.2);					
+				-webkit-border-radius:5px;
+				-moz-border-radius:5px;
+			}
+		</style>
+		<script>
+			var demos = {
+				tooltips : function(e){
+					var id = this.id;
+					$.doc
+						.sidd("removeMenus")
+						.sidd("showMenus",{dom_tag : id});
+					e.stopPropagation();
+					e.preventDefault();
+					//yeah yeah return false
+				},
+				toc  : function(){
+					var _this = $(this); 
+					$.doc.sidd("get",{},function(data){
+						var html = "";
+						$.each(data.forums,function(id,name){
+							html += tmpl("li_tmpl",{id : id, name:name});
+						});
+						html = tmpl("ul_tmpl",{type:"forums",yield : html});
+						_this.next("div").html(html).slideDown(500);
+					});
+				}, 
+				
+				tocForums : function(){
+					var _this = $(this),
+						id = _this.data("id");
+						$.doc.sidd("get",{forum_id : id},function(data){
+							var html = "";
+							$.each(data.filtered,function(i,entry){
+								html += tmpl("li_tmpl",{id : entry.id, name : entry.title})
+							});
+							html = tmpl("ul_tmpl",{type:"entries",yield : html});
+							_this.find("div").html(html).slideDown(500);
+						});
+				}, 
+				
+				tocEntry : function(e){
+					var _this = $(this), 
+						id = _this.data("id");
+					console.log(id);	
+					$.doc.sidd("get",{id : id},function(data){
+						var entry = data.filtered[0];
+						_this.find("div").html(entry.body).slideDown(500);
+					});	
+					e.stopPropagation();
+				}
+				
+				
+				
+			};
+		
+			$(function(){
+					$.doc = $(document)
+								.click(function(){
+									$.doc.sidd("removeMenus")
+								})
+								.sidd("init",{url : "https://support.zendesk.com"},function(){
+									$("#article")
+										.delegate("a.sidd-tip","click",demos.tooltips)
+										.delegate("#toc","click",demos.toc)
+										.delegate("#forums-list > li","click",demos.tocForums)
+										.delegate("#entries-list > li","click",demos.tocEntry)
+								});
+			});
+			
+		</script>
+	</head>
+	<body>
+		<div id="article" class="box" style="">
+			<h1>Tooltips</h1>
+			<p>
+				This is just one example of how you can integrate your Zendesk site into your website or application using Sidd!. 
+				In this case we are using Zendesk's own data (pulled in using JSONP) and the show/removeMenus 
+				Sidd methods to make discovering help desk <a href="#" class="sidd-tip" id="forum">forum</a> topics REALLY EASY. 
+			</p>
+			<p>So again, say you were looking for info on <a href="#" class="sidd-tip" id="api">API's</a></p>
+			
+			<h1 id="toc" style="cursor:pointer">Table of Contents</h1>
+			<div class="demo-box">
+				
+			</div>
+		</div>
+		
+		<script type="text/html"  id="ul_tmpl">
+			<ul id="<%=type%>-list">
+				<%=yield%>
+			</ul>
+		</script>
+		
+		<script type="text/html"  id="li_tmpl">
+			<li data-id="<%=id%>">
+				<h2>
+					<%=name%>
+				</h2>
+				<div class="demo-box"></div>
+			</li>
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
