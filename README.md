@@ -113,12 +113,14 @@ Removes all of the current menus on the page.
 Currently there is now way to remove only certain items from the menu stack
 		
 Example: 
+
 	$(document).sidd("removeMenus");
 
 ###toggleMenus 
 Toggles the menus in the given scope. 
 
 Example: 
+
 	$(document).sidd("toggleMenus");		
 
 ###methods
