@@ -53,8 +53,8 @@ function tests(json){
 		//init again
 		$scope.sidd("init",{url : URL, data : window.sidd_data});
 		data = $scope.sidd("data",{});
-		ok($scope !== data,"data should not return $scope element, but rather a data object")
-		ok(!data.hasOwnProperty("url"),"returned data should not have url member unless raw param is passed")
+		ok($scope !== data,"data should not return $scope element, but rather a data object");
+		ok(!data.hasOwnProperty("url"),"returned data should not have url member unless raw param is passed");
 		ok(!$.isArray(data.forums && typeof data.forums === "object"), "forums is not an array, it's an object");
 		ok($.isArray(data.entries), "entries is any array");
 		ok(data.entries.length !== 0, "data.entries is not empty"); 
@@ -96,7 +96,7 @@ function tests(json){
 		data = $scope.sidd("data",{ dom_tag : "forum"});
 		ok($.isArray(data.dom_tags),"dom_tags is an array");
 		if(data.dom_tags.length !==0){
-			ok(data.dom_tags.indexOf("forum") !== -1, "dom_tags equal to #forum are present")
+			ok(data.dom_tags.indexOf("forum") !== -1, "dom_tags equal to #forum are present");
 		}	
 	});
 	
