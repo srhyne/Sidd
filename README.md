@@ -1,6 +1,11 @@
 #Sidd 
 
 Sidd, short for [Siddhārtha Gautama](http://en.wikipedia.org/wiki/Gautama_Buddha), is a plug-in for jQuery. It allows you to integrate Zendesk forum posts into your web site/application. No License, use however you want!
+
+##Demo? 
+
+I put most of my initial development into building an extensible & flexible plugin so the demos are a little paltry right now. 
+[Here's a small demo](http://srhyne.github.com/Sidd/demos/)
  
 ##Configuration Options:
  
