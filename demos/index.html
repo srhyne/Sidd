@@ -120,9 +120,9 @@
 								.sidd("init",{url : "https://support.zendesk.com"},function(){
 									$("#article")
 										.delegate("a.sidd-tip","click",demos.tooltips)
-										.delegate("#toc","click",demos.toc)
 										.delegate("#forums-list > li","click",demos.tocForums)
 										.delegate("#entries-list > li","click",demos.tocEntry)
+									demos.toc.call($("#toc"));	
 								});
 			});
 			
