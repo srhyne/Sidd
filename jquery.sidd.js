@@ -1,7 +1,6 @@
 /*
  Sidd (short for Siddhārtha Gautama ;) plug-in for jQuery, allows you to integrate your Zendesk
  forum posts into your web site/application
- No License, use however you want!
  
  Configuration Options:
  

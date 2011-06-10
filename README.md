@@ -1,6 +1,6 @@
 #Sidd 
 
-Sidd, short for [Siddhārtha Gautama](http://en.wikipedia.org/wiki/Gautama_Buddha), is a plug-in for jQuery. It allows you to integrate Zendesk forum posts into your web site/application. No License, use however you want!
+Sidd, short for [Siddhārtha Gautama](http://en.wikipedia.org/wiki/Gautama_Buddha), is a plug-in for jQuery. It allows you to integrate Zendesk forum posts into your web site/application. 
 
 ##Demo? 
 
